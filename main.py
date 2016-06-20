@@ -68,12 +68,7 @@ def main():
 
         print (buffer_ext)
 
-        cache = []
-        i = -1
-        while(buffer_ext[i] != '\n'):
-            cache.append(buffer_ext[i])
-            i -= 1
-
+        
         done = False
 
 
