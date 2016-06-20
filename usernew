@@ -1,13 +1,3 @@
-tamanhotupla:20
-quantcolunas:4
-quantlinhas:1000
-tamanhocoluna1:3
-tamanhocoluna2:6
-tamanhocoluna3:6
-tamanhocoluna2:3
-separador:,
-INICIO
-id,first_name,last_name,cod_dep
 001,MQYQZW,TBMNSW,002
 002,WHSNTN,VPRSHG,002
 003,BBIZVT,PQKMQK,002
