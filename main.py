@@ -12,6 +12,14 @@
 	e faz a junção deles usando o algoritmo
 	Nested Loop Blocado Bufferizado
 """
+import os
+
+
+def arq_size(filename):
+    # coleta os dados do arquivo
+    statinfo = os.stat(filename)
+
+    return statinfo.st_size
 
 
 def convert_buffer_to_mat(buff):
@@ -33,7 +41,7 @@ def main():
 
     tabR_name = 'user'
     tabS_name = 'dep'
-    buff_size = 500
+    buff_size = 20
     page_size = 10
 
     # Abre os arquivos das Tabelas e verifica se foram encontrados
@@ -63,14 +71,8 @@ def main():
         cache = []
         i = -1
         while(buffer_ext[i] != '\n'):
-        	cache.append(buffer_ext[i])
-        	i -=1;
-        i = len(cache)-1
-        while i != -1:
-        	print (cache[i], end="")
-        	i-=1
-
-
+            cache.append(buffer_ext[i])
+            i -= 1
 
         done = False
 
