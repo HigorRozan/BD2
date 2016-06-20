@@ -13,6 +13,7 @@
 	Nested Loop Blocado Bufferizado
 """
 import os
+import math as m
 
 
 def arq_size(filename):
@@ -24,17 +25,15 @@ def arq_size(filename):
 
 def convert_buffer_to_mat(buff):
 	buff = buff.split('\n')
-	buff_cache = []
-	for i in buff:
-		buff_cache.append(i.split(','))
 
-	return buff_cache
+	return buff
 
 
 def register_size(tabName):
 	tabR = open(tabName, "r")
 	tabLine = tabR.readline()
 	size = len(bytes(tabLine, encoding="UTF-8"))
+	tabR.close()
 
 	return size
 
@@ -62,13 +61,28 @@ def main():
 		print ("Erro - Arquivo não encontrado")
 		exit()
 
+	# Calcula o tamanho inteiro de registros que
+	# cabem em um tamanho de buffer
+	regR_size = register_size(tabR_name)
+	regS_size = register_size(tabS_name)
 
-	x = register_size(tabR_name)
+	buff_ext_size = round(buff_size/regR_size) * regR_size
+	buff_int_size = round(buff_size/regS_size) * regS_size 
+	
+	# Calcula o número de leitura necessária
+	num_read_ext = m.floor(arq_size(tabR_name)/buff_ext_size)
+	num_read_int = m.floor(arq_size(tabS_name)/buff_int_size) 
 
-	a = tabR.read(x)
 
-	print (a)
+	# Lê o buffer
+	print (regR_size)
+	print (buff_ext_size)
+	buff_ext = tabR.read(buff_ext_size)
 
+	# Tranforma em vetor
+	mat_ext = buff_ext.splitlines()
+
+	print (buff_ext)
 
 
 if __name__ == '__main__':
