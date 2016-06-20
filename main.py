@@ -28,14 +28,15 @@ def convert_buffer_to_mat(buff):
 	for i in buff:
 		buff_cache.append(i.split(','))
 
-
 	return buff_cache
 
 
-def register_size(tabName, page):
-	tabR = open(tabName, "r", page)
+def register_size(tabName):
+	tabR = open(tabName, "r")
 	tabLine = tabR.readline()
-	print(tabLine)
+	size = len(bytes(tabLine, encoding="UTF-8"))
+
+	return size
 
 
 def main():
@@ -62,42 +63,12 @@ def main():
 		exit()
 
 
-	done = True
+	x = register_size(tabR_name)
 
-	#tabR_times =(round(arq_size(tabR_name)/buff_size));
-	#tabS_times =(round(arq_size(tabS_name)/buff_size));
+	a = tabR.read(x)
 
-	print(register_size(tabR_name,page_size))
+	print (a)
 
-	tabR_reg = round(buff_size/21)
-
-	buffer_ext = tabR.read(42)
-	#print(buffer_ext)
-
-
-	#important
-
-	#for x in range(1,tabR_times):
-	#   buffer_ext = tabR.read(buff_size)
-	#   t.append(convert_buffer_to_mat(buffer_ext, 4))
-		
-	#   print(t[0])
-
-
-		
-		
-		
-
-	# Executa um laço até o fim do algoritmo
-	#while(done):
-
-		# Lê o buffer externo
-	  #  buffer_ext = tabR.read(buff_size)
-
-	  #  print (buffer_ext)
-
-		
-	  #  done = False
 
 
 if __name__ == '__main__':
