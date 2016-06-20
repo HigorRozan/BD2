@@ -1,0 +1,13 @@
+tamanhotupla:10
+quantcolunas:2
+quantlinhas:6
+tamanhocoluna1:3
+tamanhocoluna2:6
+separador:,
+INICIO
+id_dep,departamento
+001,MATEMA
+002,FISICA
+003,COMPUT
+004,ELETRI
+005,MECANI

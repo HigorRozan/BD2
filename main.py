@@ -66,9 +66,9 @@ def main():
         	cache.append(buffer_ext[i])
         	i -=1;
         i = len(cache)-1
-        while i != -1:
-        	print (cache[i], end="")
-        	i-=1
+        # while i != -1:
+        # 	print (cache[i], end="")
+        # 	i-=1
 
 
 
