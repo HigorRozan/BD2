@@ -1,6 +1,5 @@
-id_dep,depatamento
-1,Matematica
-2,Fisica
-3,Computacao
-4,Eletrica
-5,Mecanica
+001,MATEMA
+002,FISICA
+003,COMPUT
+004,ELETRI
+005,MECANI
