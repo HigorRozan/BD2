@@ -16,6 +16,7 @@ import os
 import math as m
 from tabulate.tabulate import tabulate
 import time 
+import csv
 
 
 
@@ -106,13 +107,16 @@ def main():
     #page_size = int(input("Tamanho da Página em Bytes: "))
 
     time_all = []
-
-    for i in range(1,100):
+    #buff_values = []
+    page_values = []
+    for i in range(2,100):
     	
 	    tabR_name = "user"
 	    tabS_name = "dep"
-	    buff_size = (i*10)+1
-	    page_size = 10
+	    buff_size = 20
+	    #buff_values.append(buff_size)
+	    page_size = (i*10)
+	    page_values.append(page_size)
 
 	    # Abre os arquivos das Tabelas e verifica se foram encontrados
 	    # A função open recebe como parâmetro o tamanho em Bytes
@@ -191,7 +195,13 @@ def main():
     #print("----------------------------------------------------------------")
     #print(head)
     #print (fatores_f)
-    print(time_all)
+    
+    with open('Pagina.csv', 'w', newline='') as csvfile:
+    	spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    	spamwriter.writerow(['tempo','var_pag'])
+    	for i in range(0,len(time_all)):
+    		spamwriter.writerow([time_all[i],page_values[i]])
+
 
 if __name__ == '__main__':
     main()
