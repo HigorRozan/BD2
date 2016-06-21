@@ -1,12 +1,24 @@
+# ALUNOS
+# DAVI SHINJI MOTA KAWASAKI - RA: 1137280
+# HIGOR AUGUSTO BASSI ROZAN - RA: 1581686
+# JOÃO VITOR DE LIMA BERTONCINI - RA: 1582399
+# LUAN ANDRYL SILVA - RA: 1583140
+# VINÍCIUS DRAGO ROMANO - RA: 1581767
+# Link final do repositório do trabalho: https://github.com/HigorRozan/BD2/tree/FINAL
+
 # encoding=UTF-8
 """
-	Autores:Higor Rozan
-			João Bertoncini
-			Luan Andryl Silve
+	Autores:Davi Shinji Mota Kawasaki
+            Higor Augusto Bassi Rozan
+			João Vitor Bertoncini
+			Luan Andryl Silva
+            Vinícius Drago Romano
 
-	E-mail: higorb.rozan@gmail.com
+	E-mail: davishinjik@gmail.com
+            higorb.rozan@gmail.com
 			jvbertoncini@gmail.com
 			luan.andryl@gmail.com
+            vidromano@hotmail.com
 
 	Este código recebe duas tabela R e S
 	e faz a junção deles usando o algoritmo
