@@ -14,7 +14,9 @@
 """
 import os
 import math as m
-from tabulate import tabulate
+from tabulate.tabulate import tabulate
+import time 
+
 
 
 def arq_size(filename):
@@ -84,38 +86,28 @@ def head_register(tabName):
     return info
 
 
-def join_reg(regx, regy, positionx, positiony):
-    reg = []
-    ct = 0
-    for i in regx:
-        if(regx[ct] != regx[positionx]):
-            reg.append(regx[ct])
-        ct = ct + 1
+def join_reg(regx, regy):
+	reg = []
 
-    ct = 0
-    for i in regy:
-        if(regy[ct] != regy[positiony]):
-            reg.append(regy[ct])
-        ct = ct + 1
+	reg.append(regx[0])
+	reg.append(regx[1])
+	reg.append(regx[2])
+	reg.append(regy[1])
 
-    return reg
+	return reg
 
 
 def main():
 
     # Atribuindo valores aos Parâmetros
-    #tabR_name = input("Nome do arquivo da tabela R externa: ")
-    #tabS_name = input("Nome do arquivo da tabela S interna: ")
-    #buff_size = int(input("Tamanho do Buffer em Bytes: "))
-    #page_size = int(input("Tamanho da Página em Bytes: "))
+    tabR_name = input("Nome do arquivo da tabela R externa: ")
+    tabS_name = input("Nome do arquivo da tabela S interna: ")
+    buff_size = int(input("Tamanho do Buffer em Bytes: "))
+    page_size = int(input("Tamanho da Página em Bytes: "))
 
     # Abre os arquivos das Tabelas e verifica se foram encontrados
     # A função open recebe como parâmetro o tamanho em Bytes
     # de blocos que devem ser lido
-    tabR_name = 'user'
-    tabS_name = 'dep'
-    buff_size = 45
-    page_size = 10
 
     try:
         tabR = open(tabR_name, "r", page_size)
@@ -133,16 +125,23 @@ def main():
     regR_size = infoR[0]
     regS_size = infoS[0]
 
-    print(int(infoR[1][0][0]))
     buff_ext_size = round(buff_size / regR_size) * regR_size
     buff_int_size = round(buff_size / regS_size) * regS_size
 
     # Calcula o número de leitura necessária
     num_read_ext = 1 + m.floor(arq_size(tabR_name) / buff_ext_size)
     num_read_int = 1 + m.floor(arq_size(tabS_name) / buff_int_size)
+    
+    #Calculos dos fatores
+    fatores_f = []
+ 
+    fatores_f.append(buff_size/page_size)
+    fatores_f.append(round(page_size/register_size(tabR_name),2))
+    fatores_f.append(round(page_size/register_size(tabS_name),2))
 
     out_tab = []
     # Laço externo
+    st_time = time.time()
     for i in range(num_read_ext):
 
         # Lê o buffer
@@ -165,15 +164,24 @@ def main():
 
                 for y in mat_int:
 
-                    if (x[int(infoR[1][0][0])] == y[int(infoS[1][0][0])]):
-                        out_tab.append(
-                            join_reg(x, y, int(infoR[1][0][0]), int(infoS[1][0][0])))
+                    if (x[3] == y[0]):
+                        out_tab.append(join_reg(x, y))
 
         # Volta ai inicio da Tabela interna
-        tabS.seek(0, 0)
 
-    for reg in out_tab:
-        print( (reg))
+        tabS.seek(0, 0)
+    end_time = time.time()
+
+    time_total = end_time - st_time
+    fatores_f.append(round(time_total,4))
+    # Resultados
+
+    print (tabulate(out_tab,['cod','first_name','last_name','dep']))
+    head = ['Paginas no Buffer','Fator de Blocagem R','Fator de Blocagem S','Tempo de Execução']
+    print("----------------------------------------------------------------")
+    print(head)
+    print (fatores_f)
+   
 
 if __name__ == '__main__':
     main()
